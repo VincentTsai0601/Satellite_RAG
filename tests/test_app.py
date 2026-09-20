@@ -216,3 +216,17 @@ def test_missing_document_returns_actionable_error(settings):
     client = TestClient(create_app(settings))
     assert client.get('/document').status_code == 404
     assert client.get('/api/status').json()['document_available'] is False
+
+
+def test_cross_origin_includes_security_headers(indexed):
+    client = TestClient(create_app(indexed))
+    res = client.post('/api/chat', headers={'origin': 'https://evil.example'}, json={'question': 'gateway'})
+    assert res.status_code == 403
+    assert res.headers['x-content-type-options'] == 'nosniff'
+    assert res.headers['referrer-policy'] == 'no-referrer'
+    assert 'default-src' in res.headers['content-security-policy']
+
+
+def test_empty_query_returns_empty_results(indexed):
+    assert search(indexed, '???') == []
+    assert search(indexed, '') == []
