@@ -1,0 +1,23 @@
+# Environment and credentials
+.env
+.env*.local
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# SQLite runtime locks and temporary files
+data/index.sqlite-journal
+data/index.sqlite-wal
+data/index.sqlite-shm
+
+# Test output and artifacts
+qa-output/
+test-results/

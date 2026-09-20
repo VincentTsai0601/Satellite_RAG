@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A personal, source-grounded learning space for satellite systems.">
+  <title>Orbit · Satellite Learning</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#question" data-i18n="skip">Skip to question</a>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="Orbit"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="7"/><ellipse cx="20" cy="20" rx="19" ry="10" transform="rotate(-35 20 20)"/><circle class="dot" cx="33" cy="9" r="3"/></svg><span>orbit<span class="brand-dot">.</span></span></a>
+      <div class="brand-caption" data-i18n="brandCaption">SATELLITE LEARNING SPACE</div>
+      <button id="new-chat" class="new-chat"><span aria-hidden="true">＋</span><span data-i18n="newChat">New conversation</span></button>
+      <div class="nav-heading" data-i18n="learningPath">YOUR LEARNING PATH</div>
+      <nav id="topics" aria-label="Learning path"></nav>
+      <div class="sidebar-bottom">
+        <div class="small-orbit" aria-hidden="true">↗</div>
+        <p data-i18n="smallSteps">Big systems. Small steps.</p>
+        <span data-i18n="sidebarNote">Start with the basics. Follow your curiosity.</span>
+        <div class="local-note"><span class="status-dot"></span><span data-i18n="local">Running on your PC</span></div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="workspace-label"><span class="tiny-satellite" aria-hidden="true">◈</span><span data-i18n="workspace">Satellite study</span><span class="divider">/</span><span class="muted" data-i18n="personal">Personal workspace</span></div>
+        <div class="language-switch" role="group" aria-label="Language"><button id="lang-en" class="active" aria-pressed="true">English</button><button id="lang-zh" aria-pressed="false">繁體中文</button></div>
+      </header>
+      <div class="work-grid">
+        <main class="chat-column">
+          <div class="chat-top"><div><span class="status-dot"></span><span data-i18n="tutor">Your satellite tutor</span></div><span id="mode-badge" class="mode-badge" data-i18n="checking">Connecting…</span></div>
+          <div id="chat-scroll" class="chat-scroll">
+            <section id="welcome" class="welcome">
+              <div class="eyebrow"><span class="mini-line"></span><span data-i18n="eyebrow">A LITTLE CURIOSITY GOES A LONG WAY</span></div>
+              <h1 data-i18n="headline">Understand the<br>network above.</h1>
+              <p class="welcome-copy" data-i18n="intro">Explore how satellites connect our world. Ask a question, start with a topic, and learn one concept at a time.</p>
+              <div class="source-pill"><span aria-hidden="true">▤</span><span data-i18n="grounded">Grounded in MSS Reference Architecture v2.0</span></div>
+              <div class="suggestion-heading" data-i18n="tryQuestion">A GOOD PLACE TO START</div>
+              <div id="suggestions" class="suggestions"></div>
+              <div class="learning-note"><span aria-hidden="true">✧</span><span data-i18n="learningNote">No background needed. Every acronym gets an explanation.</span></div>
+            </section>
+            <div id="messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+            <div id="thinking" class="thinking" hidden><span class="pulse"></span><span data-i18n="thinking">Finding supporting passages…</span></div>
+          </div>
+          <div class="composer-area">
+            <div id="setup-strip" class="setup-strip" hidden><span class="status-dot amber"></span><span data-i18n="searchAvailable">Document search is ready. Connect AI for explanations.</span><button class="text-button" id="setup-button" data-i18n="connectAI">Connect AI ↗</button></div>
+            <form id="chat-form" class="composer"><label class="sr-only" for="question" data-i18n="questionLabel">Your question</label><textarea id="question" rows="2" maxlength="2000" placeholder="Ask anything about satellite systems…"></textarea><div class="composer-bottom"><span data-i18n="enterHint">Enter to send · Shift + Enter for a new line</span><button id="send" type="submit" aria-label="Send question"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div></form>
+            <div class="composer-footer"><span aria-hidden="true">◇</span><span data-i18n="verifyNote">Learn with sources. Check the original page for technical detail.</span></div>
+          </div>
+        </main>
+        <aside class="sources-column" aria-labelledby="source-heading">
+          <div class="source-top"><h2 id="source-heading" data-i18n="sources">Sources</h2><span id="source-count" class="count">01</span></div>
+          <div class="source-scroll">
+            <div id="source-default">
+              <div class="document-cover"><div class="cover-top"><span>MSSA</span><span data-i18n="reference">REFERENCE / 02</span></div><div class="cover-title" data-i18n="coverTitle">Mobile satellite<br>systems.</div><div class="cover-sub" data-i18n="coverSub">The architecture behind<br>a connected world.</div><svg class="cover-orbits" viewBox="0 0 300 170" aria-hidden="true"><circle cx="160" cy="140" r="78"/><ellipse cx="160" cy="125" rx="137" ry="43" transform="rotate(-25 160 125)"/><ellipse cx="160" cy="125" rx="125" ry="63" transform="rotate(25 160 125)"/><circle class="orbit-point" cx="68" cy="74" r="5"/><path d="M82 143h155M90 116h141M113 85h94"/></svg><div class="cover-bottom"><span>VERSION 2.0</span><span>2026</span></div></div>
+              <h3 class="document-title" data-i18n="documentTitle">MSS Reference Architecture</h3>
+              <p class="document-meta"><span data-i18n="documentOrg">Mobile Satellite Services Association</span><br><span id="document-pages">97</span> <span data-i18n="pages">pages</span><span class="meta-dot">·</span><span data-i18n="originalPDF">Original PDF</span></p>
+              <a href="/document" target="_blank" rel="noopener" class="open-document"><span data-i18n="openReference">Open reference document</span><span aria-hidden="true">↗</span></a>
+              <div class="source-explainer"><span class="source-icon" aria-hidden="true">⌘</span><h4 data-i18n="evidenceTitle">See where it comes from.</h4><p data-i18n="evidenceText">Relevant passages appear here when you ask a question. Every citation takes you back to the original page.</p></div>
+              <div class="privacy-note"><span class="status-dot"></span><span data-i18n="privacy">Your document and index stay on this PC. Connected AI receives relevant text.</span></div>
+            </div>
+            <div id="source-results" hidden></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+  <dialog id="setup-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form><span class="eyebrow" data-i18n="setupEyebrow">ONE-TIME SETUP</span><h2 data-i18n="setupTitle">Connect your learning assistant.</h2><p data-i18n="setupIntro">Document search works now. AI explanations and translation need your own OpenAI API key.</p><ol><li data-i18n="setupOne">In the app folder, copy .env.example to .env.</li><li data-i18n="setupTwo">Open .env in a text editor and add your key after OPENAI_API_KEY=. Save it locally; never paste it here.</li><li data-i18n="setupThree">Run Enable-AI.cmd to build the semantic index, then restart with Start.cmd.</li></ol><div class="setup-disclosure" data-i18n="setupDisclosure">Indexing sends extracted passages to OpenAI. Questions send your message, recent context, and matching passages. Translation sends the selected answer. API usage is billed separately.</div><button id="refresh-status" class="primary-button" data-i18n="refreshStatus">Check connection</button><p id="refresh-result" role="status"></p></dialog>
+</body>
+</html>

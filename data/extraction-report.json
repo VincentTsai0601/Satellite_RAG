@@ -1,0 +1,920 @@
+{
+  "source": "MSS Reference Architecture Version 2.0",
+  "pages": 97,
+  "chunks": 205,
+  "page_report": [
+    {
+      "page": 1,
+      "characters": 151,
+      "chunks": 1,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 2,
+      "characters": 6679,
+      "chunks": 4,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 3,
+      "characters": 4587,
+      "chunks": 3,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 4,
+      "characters": 5656,
+      "chunks": 4,
+      "labels": [
+        "Figure 1 : Demarcation Points and Interfaces of Interest  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14",
+        "Figure 2 : Generic Satellite Communication Services Delivery Components  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18",
+        "Figure 3 : Most Common Options Between Transparent and Regenerative Architectures  . . . . . . . . . . . . . . . . . . . 19",
+        "Figure 4 : 5G RAN Reference Architecture in 3GPP  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  22",
+        "Figure 5 : gNB Entities and Interfaces for User Plane and Control Place Protocols  . . . . . . . . . . . . . . . . . . . . . . . . . .  23",
+        "Figure 6 : RU On Board the Satellite  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  24",
+        "Figure 7 : RU and DU On Board the Satellite  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  24",
+        "Figure 8 : RU and DU and CU On Board the Satellite  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  25",
+        "Figure 9 : GW Requirements for Continuous Connectivity  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  30",
+        "Figure 10: 5G RAN Reference Architecture in 3GPP  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  31",
+        "Figure 11 : gNB Entities and Interfaces for User Plane and Control Place Protocols  . . . . . . . . . . . . . . . . . . . . . . . . . .  32",
+        "Figure 12 : Distributed CU/DU Deployment Transparent Option Example  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  33",
+        "Figure 13 : 5GC CN Architecture for RAN Sharing, Roaming, and Own SNO Subscribers  . . . . . . . . . . . . . . . . . . . .  34",
+        "Figure 14 : Dual-Mode CN Product (Control Plane) Running as 4G CN or 5G CN or Both Simultaneously  . . .  35",
+        "Figure 15 : High-Level Resource Management  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  37",
+        "Figure 16 : Satellite Tracker Functions  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  49",
+        "Figure 17 : Time and Frequency Hopping  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  49",
+        "Figure 18 : Time Reuse and Frequency Reuse  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  50",
+        "Figure 19 : Beam Arbitrator to L2 Scheduler Interaction  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  53",
+        "Figure 20 : Beam Arbitrator Architecture . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  54",
+        "Figure 21 : Cell Coverage Plan Example  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  55",
+        "Figure 22 : Cell Reuse Group Pattern  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  56",
+        "Figure 23 : Satellite Footprint Over Time  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  56",
+        "Figure 24 : Beam Hopping/Mandatory Cell Signal Schemes Example  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  58",
+        "Figure 25 : NTN Architecture Types  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  59",
+        "Figure 26 : Deployment View of a Regenerative Option 1 NTN Architecture  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  60",
+        "Figure 27 : O-RAN Reference Architecture  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61",
+        "Figure 28 : Stay Connected: Seamless Transitions Between Mobile Broadband Networks  . . . . . . . . . . . . . . . . . .  63",
+        "Figure 29 : Tiered RRM with O-RAN architecture, Non-RT RIC, Near-RT RIC, and gNB L2 scheduler  . . . . . . . . .  64",
+        "Figure 30 : Altitude/Inclination to EFA Relation  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  65",
+        "Figure 31 : Frequency Band Management  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  66",
+        "Figure 32 : Network ID Management  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  66",
+        "Figure 33 : Roaming and Clearing house concepts  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  68",
+        "Figure 34 : Satellite System, MSS Licensee, and Boundaries  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  69",
+        "Figure 35 : Satellite Service, MSS Licensee, and MNO Relationship  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  70"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 5,
+      "characters": 2470,
+      "chunks": 1,
+      "labels": [
+        "Figure 36 : MSS to Roaming MSS  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71",
+        "Figure 37 : MSS to Satellite Service Provider  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71",
+        "Figure 38 : Domestic MNO&MSS to Foreign MNO&MSS  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  72",
+        "Figure 39 : Network Demarcation Options  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  73",
+        "Figure 40 : Option 1 Multiplexing at the Gateway  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  75",
+        "Figure 41 : Option 2 MOCN and MORAN  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  75",
+        "Figure 42 : Option 3 Network Slicing and RAN Mutualization  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  75",
+        "Figure 43 :  Digital Beamforming Architectures for Mixed NR + NB-IoT Payload  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 80",
+        "Table 1 : Reflector-Based Antenna and DRA Characteristics  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  28",
+        "Table 2 : LEO 600km S-Band Example  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  39",
+        "Table 3 : Device and Terminal Types Characteristics  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41",
+        "Table 4 : Channels and Periodicity  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  52",
+        "Table 5: Fixed and Marginal Costs Per Stream (in Terms of # of Complex Multiplications Per Second) for the",
+        "Table 6 : Test cases the UE Must Pass to be Interoperable  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  93"
+      ],
+      "warnings": [
+        "figure",
+        "table"
+      ]
+    },
+    {
+      "page": 6,
+      "characters": 3041,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 7,
+      "characters": 3577,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 8,
+      "characters": 973,
+      "chunks": 1,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 9,
+      "characters": 3294,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 10,
+      "characters": 2775,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 11,
+      "characters": 2189,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 12,
+      "characters": 3055,
+      "chunks": 4,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 13,
+      "characters": 3126,
+      "chunks": 3,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 14,
+      "characters": 1032,
+      "chunks": 2,
+      "labels": [
+        "Figure 1 : Demarcation Points and Interfaces of Interest"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 15,
+      "characters": 2612,
+      "chunks": 3,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 16,
+      "characters": 1456,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 17,
+      "characters": 1773,
+      "chunks": 1,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 18,
+      "characters": 1160,
+      "chunks": 3,
+      "labels": [
+        "Figure 2 : Generic Satellite Communication Services Delivery Components"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 19,
+      "characters": 1505,
+      "chunks": 1,
+      "labels": [
+        "Figure 3 : Most Common Options Between Transparent and Regenerative Architectures"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 20,
+      "characters": 2956,
+      "chunks": 5,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 21,
+      "characters": 1927,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 22,
+      "characters": 645,
+      "chunks": 1,
+      "labels": [
+        "Figure 4: 5G RAN Reference Architecture in 3GPP"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 23,
+      "characters": 1827,
+      "chunks": 2,
+      "labels": [
+        "Figure 5: gNB Entities and Interfaces for User Plane and Control Place Protocols"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 24,
+      "characters": 1281,
+      "chunks": 1,
+      "labels": [
+        "Figure 6 : RU On Board the Satellite",
+        "Figure 7 : RU and DU On Board the Satellite"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 25,
+      "characters": 1427,
+      "chunks": 1,
+      "labels": [
+        "Figure 8 : RU and DU and CU On Board the Satellite"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 26,
+      "characters": 3133,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 27,
+      "characters": 2189,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 28,
+      "characters": 3249,
+      "chunks": 1,
+      "labels": [
+        "Table 1 : Reflector-Based Antenna and DRA Characteristics"
+      ],
+      "warnings": [
+        "table"
+      ]
+    },
+    {
+      "page": 29,
+      "characters": 2563,
+      "chunks": 4,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 30,
+      "characters": 2356,
+      "chunks": 2,
+      "labels": [
+        "Figure 9 : GW Requirements for Continuous Connectivity"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 31,
+      "characters": 2180,
+      "chunks": 3,
+      "labels": [
+        "Figure 10: 5G RAN Reference Architecture in 3GPP"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 32,
+      "characters": 2499,
+      "chunks": 2,
+      "labels": [
+        "Figure 11 : gNB Entities and Interfaces for User Plane and Control Place Protocols"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 33,
+      "characters": 2222,
+      "chunks": 2,
+      "labels": [
+        "Figure 12 : Distributed CU/DU Deployment Transparent Option Example"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 34,
+      "characters": 2157,
+      "chunks": 2,
+      "labels": [
+        "Figure 13 : 5GC CN Architecture for RAN Sharing, Roaming and Own SNO Subscribers"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 35,
+      "characters": 2245,
+      "chunks": 2,
+      "labels": [
+        "Figure 14 : Dual-Mode CN Product (Control Plane) Running as 4G CN or 5G CN or Both Simultaneously"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 36,
+      "characters": 2680,
+      "chunks": 3,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 37,
+      "characters": 1548,
+      "chunks": 1,
+      "labels": [
+        "Figure 15 : High-level Resource Management"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 38,
+      "characters": 1248,
+      "chunks": 1,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 39,
+      "characters": 2036,
+      "chunks": 1,
+      "labels": [
+        "Table 2 : LEO 600km S-Band Example"
+      ],
+      "warnings": [
+        "table",
+        "unit_conflict"
+      ]
+    },
+    {
+      "page": 40,
+      "characters": 2811,
+      "chunks": 3,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 41,
+      "characters": 2284,
+      "chunks": 1,
+      "labels": [
+        "Table 3 : Device and Terminal Types Characteristics"
+      ],
+      "warnings": [
+        "table"
+      ]
+    },
+    {
+      "page": 42,
+      "characters": 2223,
+      "chunks": 4,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 43,
+      "characters": 1853,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 44,
+      "characters": 1966,
+      "chunks": 1,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 45,
+      "characters": 1556,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 46,
+      "characters": 1689,
+      "chunks": 3,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 47,
+      "characters": 1468,
+      "chunks": 1,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 48,
+      "characters": 2307,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 49,
+      "characters": 733,
+      "chunks": 2,
+      "labels": [
+        "Figure 16 : Satellite Tracker Functions",
+        "Figure 17 : Time and Frequency Hopping"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 50,
+      "characters": 2383,
+      "chunks": 2,
+      "labels": [
+        "Figure 18 : Time Reuse and Frequency Reuse"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 51,
+      "characters": 1616,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 52,
+      "characters": 2278,
+      "chunks": 1,
+      "labels": [
+        "Table 4 : Channels and Periodicity"
+      ],
+      "warnings": [
+        "table"
+      ]
+    },
+    {
+      "page": 53,
+      "characters": 2204,
+      "chunks": 2,
+      "labels": [
+        "Figure 19 : Beam Arbitrator to L2 Scheduler Interaction"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 54,
+      "characters": 2481,
+      "chunks": 2,
+      "labels": [
+        "Figure 20 : Beam Arbitrator Architecture"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 55,
+      "characters": 1621,
+      "chunks": 2,
+      "labels": [
+        "Figure 21 : Cell Coverage Plan Example"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 56,
+      "characters": 1477,
+      "chunks": 2,
+      "labels": [
+        "Figure 22 : Cell Reuse Group Pattern",
+        "Figure 23 : Satellite Footprint Over Time"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 57,
+      "characters": 1579,
+      "chunks": 1,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 58,
+      "characters": 461,
+      "chunks": 1,
+      "labels": [
+        "Figure 24 : Beam Hopping/Mandatory Cell Signal Schemes Example"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 59,
+      "characters": 2128,
+      "chunks": 3,
+      "labels": [
+        "Figure 25 : NTN Architecture Types"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 60,
+      "characters": 1713,
+      "chunks": 1,
+      "labels": [
+        "Figure 26 : Deployment View of a Regenerative Option 1 NTN Architecture"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 61,
+      "characters": 1661,
+      "chunks": 3,
+      "labels": [
+        "Figure 27 : O-RAN Reference Architecture"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 62,
+      "characters": 2489,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 63,
+      "characters": 1066,
+      "chunks": 1,
+      "labels": [
+        "Figure 28 : Stay connected: Seamless Transitions Between Mobile Broadband Networks"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 64,
+      "characters": 2780,
+      "chunks": 3,
+      "labels": [
+        "Figure 29 : Tiered RRM with O-RAN Architecture, Non-RT RIC, Near-RT RIC and gNB L2 Scheduler"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 65,
+      "characters": 1809,
+      "chunks": 3,
+      "labels": [
+        "Figure 30 : Altitude/Inclination to EFA Relation"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 66,
+      "characters": 927,
+      "chunks": 2,
+      "labels": [
+        "Figure 31 : Frequency Band Management",
+        "Figure 32 : Network ID Management"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 67,
+      "characters": 2483,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 68,
+      "characters": 2195,
+      "chunks": 3,
+      "labels": [
+        "Figure 33 : Roaming and Clearing House Concepts"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 69,
+      "characters": 1669,
+      "chunks": 1,
+      "labels": [
+        "Figure 34 : Satellite System, MSS Licensee and Boundaries"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 70,
+      "characters": 1060,
+      "chunks": 1,
+      "labels": [
+        "Figure 35 : Satellite Service, MSS Licensee and MNO"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 71,
+      "characters": 1078,
+      "chunks": 3,
+      "labels": [
+        "Figure 36 : MSS to Roaming MSS",
+        "Figure 37 : MSS to Satellite Service Provider"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 72,
+      "characters": 2143,
+      "chunks": 3,
+      "labels": [
+        "Figure 38 : Domestic MNO&MSS to foreign MNO&MSS"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 73,
+      "characters": 1220,
+      "chunks": 2,
+      "labels": [
+        "Figure 39 : Network Demarcation Options"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 74,
+      "characters": 2189,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 75,
+      "characters": 954,
+      "chunks": 1,
+      "labels": [
+        "Figure 40 : Option 1 Multiplexing at the Gateway",
+        "Figure 41 : Option 2 MOCN and MORAN",
+        "Figure 42 : Option 3 Network Slicing and RAN"
+      ],
+      "warnings": [
+        "figure"
+      ]
+    },
+    {
+      "page": 76,
+      "characters": 2287,
+      "chunks": 5,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 77,
+      "characters": 2302,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 78,
+      "characters": 1962,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 79,
+      "characters": 2453,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 80,
+      "characters": 75,
+      "chunks": 1,
+      "labels": [
+        "Figure 43:  Digital Beamforming Architectures for Mixed NR + NB-IoT Payload"
+      ],
+      "warnings": [
+        "figure",
+        "sparse_text"
+      ]
+    },
+    {
+      "page": 81,
+      "characters": 1824,
+      "chunks": 3,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 82,
+      "characters": 1438,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 83,
+      "characters": 1524,
+      "chunks": 1,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 84,
+      "characters": 1475,
+      "chunks": 1,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 85,
+      "characters": 2734,
+      "chunks": 1,
+      "labels": [
+        "Table 5: Fixed and Marginal Costs per Stream (in Terms of # of Complex Multiplications per Second) for"
+      ],
+      "warnings": [
+        "table"
+      ]
+    },
+    {
+      "page": 86,
+      "characters": 2236,
+      "chunks": 4,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 87,
+      "characters": 1760,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 88,
+      "characters": 1330,
+      "chunks": 3,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 89,
+      "characters": 1899,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 90,
+      "characters": 2049,
+      "chunks": 3,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 91,
+      "characters": 1837,
+      "chunks": 3,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 92,
+      "characters": 936,
+      "chunks": 4,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 93,
+      "characters": 1413,
+      "chunks": 1,
+      "labels": [
+        "Table 6 : Test Cases the UE Must Pass to be Interoperable"
+      ],
+      "warnings": [
+        "table"
+      ]
+    },
+    {
+      "page": 94,
+      "characters": 1200,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 95,
+      "characters": 678,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 96,
+      "characters": 823,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    },
+    {
+      "page": 97,
+      "characters": 790,
+      "chunks": 2,
+      "labels": [],
+      "warnings": []
+    }
+  ],
+  "note": "Text-only extraction. Figure arrows, embedded diagram labels and table layout may be missing. Inspect original PDF for visual evidence."
+}
