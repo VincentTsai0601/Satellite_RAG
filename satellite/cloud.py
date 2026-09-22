@@ -1,5 +1,6 @@
-"""OpenAI boundary. Credentials and provider error bodies never leave this module."""
+"""AI boundary. Credentials and provider error bodies never leave this module."""
 import json
+import re
 from pathlib import Path
 
 import httpx
@@ -26,18 +27,15 @@ class CloudError(Exception):
         super().__init__(code)
 
 
-_prompt_cache = {'mtime': 0, 'text': ''}
-
-
 def get_tutor_prompt():
+    # Read the small, security-critical file on each answer; never reuse stale rules.
     try:
-        mtime = PROMPT.stat().st_mtime
-        if mtime != _prompt_cache['mtime']:
-            _prompt_cache['text'] = PROMPT.read_text(encoding='utf-8')
-            _prompt_cache['mtime'] = mtime
-    except OSError:
-        pass
-    return _prompt_cache['text']
+        instructions = PROMPT.read_text(encoding='utf-8')
+    except (OSError, UnicodeError):
+        raise CloudError('missing_prompt') from None
+    if not instructions.strip():
+        raise CloudError('missing_prompt')
+    return instructions
 
 
 class Cloud:
@@ -49,7 +47,8 @@ class Cloud:
     def _get_client(self):
         if self._client is None or self._client.is_closed:
             self._client = httpx.Client(
-                base_url='https://api.openai.com/v1/',
+                base_url=('https://generativelanguage.googleapis.com/v1beta/'
+                          if self.settings.ai_provider == 'gemini' else 'https://api.openai.com/v1/'),
                 timeout=httpx.Timeout(65, connect=10),
                 transport=self.transport,
                 follow_redirects=False,
@@ -71,7 +70,9 @@ class Cloud:
             raise CloudError('missing_key')
         try:
             client = self._get_client()
-            response = client.post(route, json=payload, headers={'Authorization': f'Bearer {self.settings.api_key}'})
+            headers = ({'x-goog-api-key': self.settings.api_key} if self.settings.ai_provider == 'gemini'
+                       else {'Authorization': f'Bearer {self.settings.api_key}'})
+            response = client.post(route, json=payload, headers=headers)
             if response.status_code in (401, 403):
                 raise CloudError('provider_auth')
             if response.status_code == 429:
@@ -87,6 +88,8 @@ class Cloud:
             raise CloudError('provider_error') from None
 
     def embed(self, texts):
+        if not self.settings.embeddings_enabled:
+            raise CloudError('embedding_unavailable')
         data = self.post('embeddings', {'model': self.settings.embedding_model, 'input': texts, 'encoding_format': 'float'})
         try:
             items = sorted(data['data'], key=lambda item: item['index'])
@@ -101,6 +104,8 @@ class Cloud:
             raise CloudError('provider_format') from None
 
     def structured(self, instructions, text):
+        if self.settings.ai_provider == 'gemini':
+            return self._gemini_structured(instructions, text)
         payload = {
             'model': self.settings.chat_model, 'store': False, 'instructions': instructions,
             'input': [{'role': 'user', 'content': text}], 'max_output_tokens': 2600,
@@ -114,6 +119,26 @@ class Cloud:
                              for part in message.get('content', []) if part.get('type') == 'output_text')
             return json.loads(output)['sections']
         except (KeyError, TypeError, ValueError, AttributeError):
+            raise CloudError('provider_format') from None
+
+    def _gemini_structured(self, instructions, text):
+        # Reject URL paths/query parameters in model names.
+        if not re.fullmatch(r'gemini-[a-zA-Z0-9._-]+', self.settings.chat_model):
+            raise CloudError('provider_model')
+        data = self.post('models/' + self.settings.chat_model + ':generateContent', {
+            'systemInstruction': {'parts': [{'text': instructions}]},
+            'contents': [{'role': 'user', 'parts': [{'text': text}]}],
+            'generationConfig': {'maxOutputTokens': 8192, 'responseMimeType': 'application/json',
+                                 'responseJsonSchema': SCHEMA},
+        })
+        try:
+            candidate = data['candidates'][0]
+            if candidate.get('finishReason') != 'STOP':
+                raise ValueError()
+            output = ''.join(part['text'] for part in candidate['content']['parts']
+                             if not part.get('thought', False))
+            return json.loads(output)['sections']
+        except (KeyError, IndexError, TypeError, ValueError, AttributeError):
             raise CloudError('provider_format') from None
 
     def answer(self, question, language, history, sources):

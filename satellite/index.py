@@ -155,12 +155,14 @@ def build_index(settings, pages=None):
 def status(settings):
     result = {'pages': 0, 'chunks': 0, 'embedded_chunks': 0, 'version': VERSION, 'title': TITLE,
               'document_available': settings.pdf.is_file(), 'api_configured': bool(settings.api_key),
-              'chat_model': settings.chat_model, 'embedding_model': settings.embedding_model}
+              'chat_model': settings.chat_model, 'embedding_model': settings.embedding_model,
+              'ai_provider': settings.ai_provider}
     if not settings.db.exists():
         return result
     with connect(settings) as con:
         result['chunks'] = con.execute('SELECT COUNT(*) FROM chunks').fetchone()[0]
-        result['embedded_chunks'] = con.execute('SELECT COUNT(*) FROM chunks WHERE embedding IS NOT NULL AND embedding_model=?', (settings.embedding_model,)).fetchone()[0]
+        if settings.embeddings_enabled:
+            result['embedded_chunks'] = con.execute('SELECT COUNT(*) FROM chunks WHERE embedding IS NOT NULL AND embedding_model=?', (settings.embedding_model,)).fetchone()[0]
         row = con.execute("SELECT value FROM metadata WHERE key='pages'").fetchone()
         result['pages'] = json.loads(row[0]) if row else 0
     return result

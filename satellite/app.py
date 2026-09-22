@@ -1,7 +1,6 @@
 from pathlib import Path
 import re
 from typing import Literal
-from urllib.parse import urlsplit
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse
@@ -82,9 +81,8 @@ def create_app(settings=None, cloud=None):
     async def local_only(request: Request, call_next):
         if request.method == 'POST':
             origin = request.headers.get('origin')
-            if origin:
-                parsed = urlsplit(origin)
-                if parsed.scheme != 'http' or parsed.netloc != request.headers.get('host'):
+            if origin is not None:
+                if origin != 'http://' + request.headers.get('host', ''):
                     return JSONResponse({'detail': {'code': 'cross_origin'}}, status_code=403, headers=SECURITY_HEADERS)
             if request.headers.get('sec-fetch-site') == 'cross-site':
                 return JSONResponse({'detail': {'code': 'cross_origin'}}, status_code=403, headers=SECURITY_HEADERS)
@@ -103,7 +101,7 @@ def create_app(settings=None, cloud=None):
 
     @app.exception_handler(CloudError)
     async def cloud_error(request, exc):
-        return JSONResponse({'detail': {'code': exc.code}}, status_code=503 if exc.code == 'missing_key' else 502, headers=SECURITY_HEADERS)
+        return JSONResponse({'detail': {'code': exc.code}}, status_code=503 if exc.code in {'missing_key', 'missing_prompt'} else 502, headers=SECURITY_HEADERS)
 
     @app.get('/')
     def home():
@@ -140,7 +138,7 @@ def create_app(settings=None, cloud=None):
             if previous:
                 query += '\n' + '\n'.join(previous)
         vector, retrieval_warning = None, None
-        if settings.api_key and info['embedded_chunks']:
+        if settings.api_key and settings.embeddings_enabled and info['embedded_chunks']:
             try:
                 vector = cloud.embed([query])[0]
             except CloudError:
@@ -151,8 +149,8 @@ def create_app(settings=None, cloud=None):
                     'I could not find document passages that support an answer. Try a satellite term or choose a learning topic.')
             return {'mode': 'no_evidence', 'sections': limitation(text), 'sources': [], 'retrieval': 'keyword', 'warning': retrieval_warning}
         if not settings.api_key:
-            text = ('尚未設定 OpenAI API 金鑰。目前顯示的是文件搜尋結果，而非 AI 解答。你可以閱讀右側的英文原文，或開啟引用頁面。啟用 AI 後即可取得中文說明。' if payload.language == 'zh-TW' else
-                    'OpenAI API is not connected yet. These are document search results, not an AI answer. Read the original excerpts in Sources or open their PDF pages. Connect AI to receive explanations.')
+            text = ('尚未設定所選 AI 服務的 API 金鑰。目前顯示的是文件搜尋結果，而非 AI 解答。你可以閱讀右側的英文原文，或開啟引用頁面。啟用 AI 後即可取得中文說明。' if payload.language == 'zh-TW' else
+                    'The selected AI provider API is not connected yet. These are document search results, not an AI answer. Read the original excerpts in Sources or open their PDF pages. Connect AI to receive explanations.')
             return {'mode': 'search', 'sections': limitation(text), 'sources': sources, 'retrieval': 'keyword', 'warning': None}
         raw = cloud.answer(payload.question, payload.language, [turn.model_dump() for turn in payload.history], sources)
         sections = validate_sections(raw, sources)

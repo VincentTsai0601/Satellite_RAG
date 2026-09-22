@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+set -eu
+
+cd "$(dirname "$0")/.."
+
+mkdir -p .pytest-tmp
+export TEMP="$PWD/.pytest-tmp"
+export TMP="$PWD/.pytest-tmp"
+
+./.venv/Scripts/python.exe -m pytest -q
+./.venv/Scripts/python.exe -m satellite.ingest --check
+node --check static/app.js

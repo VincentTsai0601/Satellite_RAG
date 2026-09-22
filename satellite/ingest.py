@@ -15,6 +15,9 @@ def main():
     parser.add_argument('--check', action='store_true')
     args = parser.parse_args()
     settings = Settings.load()
+    if args.embed and not settings.embeddings_enabled:
+        print('Gemini uses local keyword retrieval. Embedding requires AI_PROVIDER=openai and OPENAI_API_KEY. No text was sent.', file=sys.stderr)
+        return 2
     if args.check:
         info = status(settings)
         print(json.dumps(info, indent=2))

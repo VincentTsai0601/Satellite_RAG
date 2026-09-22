@@ -17,11 +17,11 @@ If you move the project to another PC, or its Python runtime changes, recreate t
 Without an API key, the application is deliberately **document search only**. It does not generate answers or pretend that excerpts are an AI response. Chinese search uses a small satellite-term dictionary in this mode; unfamiliar Chinese phrasing may need English technical terms.
 
 1. Copy **.env.example** to **.env** in this folder. Ensure Windows has not appended `.txt`.
-2. Edit `.env` locally and set `OPENAI_API_KEY=your-real-key`. Do not paste your key into chat or a browser field. Obtain a key from your OpenAI API account; API billing is separate from using this Codex conversation.
-3. Double-click **Enable-AI.cmd**. It sends the extracted passages to OpenAI and stores embeddings in the local SQLite index. Completed batches are cached, so retrying resumes incomplete work.
+2. Edit `.env` locally. Set `AI_PROVIDER=openai` with `OPENAI_API_KEY=your-real-key`, or set `AI_PROVIDER=gemini` with `GEMINI_API_KEY=your-real-key`. Get Gemini keys from https://aistudio.google.com/app/apikey. Do not paste keys into chat or a browser field.
+3. Restart with **Start.cmd**. Gemini provides AI answers and translation using local keyword retrieval. **Enable-AI.cmd** is optional and only supports OpenAI semantic embeddings.
 4. Stop and restart the app with **Start.cmd**. The status badge reports AI + hybrid search when all chunks have embeddings for the configured model.
 
-An API key without embeddings still permits AI answers over local keyword retrieval. Changing `EMBEDDING_MODEL` requires running Enable-AI.cmd again. Changing `CHAT_MODEL` requires restarting. Defaults are `gpt-4.1-mini` and `text-embedding-3-small`.
+An API key without embeddings still permits AI answers over local keyword retrieval. Gemini uses `gemini-2.5-flash` by default; override it with `GEMINI_MODEL`. OpenAI defaults are `gpt-4.1-mini` and `text-embedding-3-small`.
 
 No key was available during initial development. The shipped index contains real extracted text and keyword search data, with no fabricated vectors. See **VERIFICATION.md** for what was tested and what still requires credentials.
 
@@ -48,7 +48,7 @@ The PDF is a versioned reference, not a live source for the latest standard or d
 ## Data and costs
 
 - **Local:** original PDF, extracted text, section/page metadata, keyword index, cached vectors, runtime prompt, and credentials in `.env`.
-- **Sent to OpenAI:** extracted text during optional embedding; question and bounded recent context plus selected passages for answers; selected answer text for translation. API requests use `store:false` for generated responses. Provider handling still follows your API account's policies; this is not an offline or zero-retention guarantee.
+- **Sent to the selected provider:** question and bounded recent context plus selected passages for answers; selected answer text for translation. OpenAI receives extracted text only during optional embedding. Provider handling follows your API account's policies; this is not an offline or zero-retention guarantee.
 - **Never in browser assets:** your API key. The app does not save chat transcripts or call web search.
 - **Billing:** embedding, answer, and translation requests use your separately billed API account. No automatic paid embedding job runs at server startup.
 
@@ -98,11 +98,11 @@ Local endpoints: `GET /api/status`, `POST /api/chat` (`question`, `language`, `h
 目前未設定 API 金鑰時，網站只提供真實的文件搜尋，不會假裝產生 AI 解答。
 
 1. 將 **.env.example** 複製為 **.env**，注意副檔名不要變成 `.txt`。
-2. 在文字編輯器中，於 `OPENAI_API_KEY=` 後填入你自己的 OpenAI API 金鑰。不要將金鑰貼到聊天或網頁欄位。
-3. 執行 **Enable-AI.cmd** 建立語意索引，再停止並重新執行 **Start.cmd**。
+2. 在文字編輯器中，將 `AI_PROVIDER` 設為 `openai` 或 `gemini`，並在 `OPENAI_API_KEY=` 或 `GEMINI_API_KEY=` 後填入對應金鑰。不要將金鑰貼到聊天或網頁欄位。
+3. 重新執行 **Start.cmd**。只有使用 OpenAI 語意嵌入時才執行 **Enable-AI.cmd**。
 4. 即可取得中文說明，並個別翻譯解答；來源引用會保留。
 
-建立語意索引會將文件段落傳送至 OpenAI。提問會傳送問題、近期對話與相關段落；翻譯會傳送選取的解答。**API 費用另計**。原始 PDF、索引與金鑰保留在本機，瀏覽器不會取得金鑰。
+使用 OpenAI 建立語意索引會將文件段落傳送至 OpenAI。提問與翻譯會將必要文字傳送至所選 AI 服務。**API 費用另計**。原始 PDF、索引與金鑰保留在本機，瀏覽器不會取得金鑰。
 
 ## 建議學習順序
 

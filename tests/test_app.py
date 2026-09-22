@@ -161,6 +161,30 @@ def test_cloud_answer_validates_citations_and_separates_untrusted_text(indexed):
     assert 'gateway' not in captured[-1]['instructions'].lower()
 
 
+def test_gemini_answer_uses_google_endpoint_and_structured_output(indexed):
+    row = search(indexed, 'gateway')[0]
+    indexed.api_key = 'sk-test-never-expose-this'
+    indexed.ai_provider = 'gemini'
+    indexed.chat_model = 'gemini-2.5-flash'
+    captured = []
+    def handler(req):
+        captured.append(req)
+        return httpx.Response(200, json={'candidates': [{
+            'finishReason': 'STOP',
+            'content': {'parts': [{'text': json.dumps({'sections': [
+                {'kind': 'evidence', 'text': 'A gateway connects the satellite to ground networks.',
+                 'citations': [row['id']]}
+            ]})}]}
+        }]})
+    cloud = Cloud(indexed, transport=httpx.MockTransport(handler))
+    client = TestClient(create_app(indexed, cloud=cloud))
+    result = client.post('/api/chat', json={'question': 'gateway'}).json()
+    assert result['mode'] == 'answer'
+    assert captured[0].url.path.endswith('/v1beta/models/gemini-2.5-flash:generateContent')
+    assert captured[0].headers['x-goog-api-key'] == 'sk-test-never-expose-this'
+    assert json.loads(captured[0].content)['generationConfig']['responseMimeType'] == 'application/json'
+
+
 def test_invalid_citation_cannot_reach_user(indexed):
     cloud = cloud_for(indexed, response_payload([{'kind': 'evidence', 'text': 'Invented.', 'citations': ['made-up-id']}]))
     response = TestClient(create_app(indexed, cloud=cloud)).post('/api/chat', json={'question': 'gateway'})
@@ -230,3 +254,37 @@ def test_cross_origin_includes_security_headers(indexed):
 def test_empty_query_returns_empty_results(indexed):
     assert search(indexed, '???') == []
     assert search(indexed, '') == []
+
+
+@pytest.mark.parametrize('origin', ['http://[', 'http://127.0.0.1/path', 'http://127.0.0.1?query', 'null'])
+def test_invalid_origin_is_rejected_without_crashing(indexed, origin):
+    client = TestClient(create_app(indexed), raise_server_exceptions=False)
+    response = client.post('/api/chat', headers={'origin': origin}, json={'question': 'gateway'})
+    assert response.status_code == 403
+    assert response.json()['detail']['code'] == 'cross_origin'
+
+
+@pytest.mark.parametrize('contents', [None, '', '   ', b'\xff'])
+def test_unavailable_tutor_prompt_prevents_cloud_request(indexed, monkeypatch, tmp_path, contents):
+    import satellite.cloud as cloud_module
+    prompt = tmp_path / 'tutor.md'
+    if contents is not None:
+        prompt.write_bytes(contents if isinstance(contents, bytes) else contents.encode())
+    monkeypatch.setattr(cloud_module, 'PROMPT', prompt)
+    captured = []
+    cloud = cloud_for(indexed, response_payload([{'kind': 'limitation', 'text': 'Test', 'citations': []}]), captured)
+    response = TestClient(create_app(indexed, cloud=cloud), raise_server_exceptions=False).post('/api/chat', json={'question': 'gateway'})
+    assert response.status_code == 503
+    assert response.json()['detail']['code'] == 'missing_prompt'
+    assert captured == []
+
+
+def test_deleted_prompt_does_not_reuse_cached_instructions(indexed, monkeypatch, tmp_path):
+    import satellite.cloud as cloud_module
+    prompt = tmp_path / 'tutor.md'
+    prompt.write_text('Required teaching rules', encoding='utf-8')
+    monkeypatch.setattr(cloud_module, 'PROMPT', prompt)
+    assert cloud_module.get_tutor_prompt() == 'Required teaching rules'
+    prompt.unlink()
+    with pytest.raises(CloudError, match='missing_prompt'):
+        cloud_module.get_tutor_prompt()
